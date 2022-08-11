@@ -1,0 +1,105 @@
+echo "# BASIC-SQL" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/gicban/BASIC-SQL.git
+git push -u origin main
+
+--STATEMENT FOR CREATING A NEW TABLE--
+
+CREATE TABLE table_name (
+   column1 DATA_TYPE,
+   column2 DATA_TYPE,
+   column3 DATA_TYPE
+);
+
+--EXAMPLE-- 
+CREATE TABLE friends (
+  id INTEGER
+  ,name TEXT 
+  ,birthday DATE
+  );
+
+
+--STATEMENT FOR INSERTING NEW RECORDS INTO A TABLE--
+INSERT INTO table_name (column1, column2, column3) 
+VALUES ('value1', 'value2', 'value3');
+
+--EXAMPLE--
+INSERT INTO friends (id, name, birthday)
+  VALUES (1, 'Ororo Munroe', 
+  '1940-05-30');
+  INSERT INTO friends (id, name, birthday)
+  VALUES (2, 'Karissa V', 
+  '1998-08-03');
+  INSERT INTO friends (id, name, birthday)
+  VALUES (3, 'Imane I', 
+  '1997-12-03');
+
+--DEPENDING ON THE VALUE YOU MAY NEED TO ADD PARENTHESIS AROUND THE VALUE'--
+--DATE DATA TYPE FORMAT IS TYPICALLY YYYY-MM-DD
+-- ; ends a SQL command.--
+
+
+--USING THE UPDATE STATEMENT--- 
+--USE TO MODIFY AN EXISTING RECORD(S) IN A TABLE--
+UPDATE table_name
+SET column1 = value1
+WHERE condition;
+
+--EXAMPLE--
+UPDATE friends
+SET name = 'Storm'
+WHERE id = 1;
+
+
+--USING THE ALTER TABLE STATEMENT--
+--USE THIS TO ADD, DELETE, OR MODIFY COLUMNS IN AN EXISTING TABLE--
+ALTER TABLE table_name
+ADD COLUMN column DATA_TYPE;
+
+--EXAMPLE--ALTER TABLE friends 
+ADD COLUMN email TEXT;
+
+--AFTER ALTERING A TABLE BY ADDING A NEW COLUMN YOU WOULD USE THE UPDATE FUNCTION TO INSERT DATA--
+UPDATE friends 
+SET email = 'storm@codecademy.com'
+WHERE id = 1;
+
+
+--USING THE DELETE STATEMENT--
+--USE THIS TO DELETE ROWS--
+DELETE FROM table
+WHERE id = integer;
+
+--EXAMPLE--
+DELETE FROM friends 
+WHERE id = 1;
+
+--IF YOU DELETE A ROW, IT STILL HOLDS THE ROW NUMBERING, SO BE MINDFUL WHEN ALTERING ANY DATA IN OTHER ROWS, THE ROW NUMBERS STAY THE SAME EVEN WHEN YOU DELETE A ROW--
+--EXAMPLE--
+DELETE FROM friends 
+WHERE id = 1;
+
+ALTER TABLE friends 
+ADD COLUMN phone INTEGER; 
+
+ALTER TABLE friends
+ADD COLUMN instagram TEXT;
+
+UPDATE friends 
+SET phone = '111-1111'
+WHERE id = 2;
+
+UPDATE friends 
+SET phone = '222-2222'
+WHERE id = 3;
+
+UPDATE friends 
+SET instagram ='kv'
+WHERE id = 2;
+
+UPDATE friends 
+SET instagram = 'i_a'
+WHERE id = 3;
