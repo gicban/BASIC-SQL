@@ -1,0 +1,103 @@
+echo "# BASIC-SQL" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/gicban/BASIC-SQL.git
+git push -u origin main
+
+-SQL COMMANDS USED TO QUERY A TABLE-- 
+--PURPOSE: TO RETRIEVE INFORMATION STORED IN A DATABASE OTHERWISE KNOWN AS "QUERYING"--
+
+--USING THE SELECT STATEMENT--
+SELECT column1, column2 
+FROM table_name;
+
+--EXAMPLE--
+SELECT name, genre, year
+FROM movies;
+
+--USING THE AS STATEMENT--
+--USE THE AS STATEMENT WHEN YOU WANT TO RENAME A COLUMN OR TABLE USING AN ALIAS, NEW NAME CAN BE ANYTHING YOU WANT AS LONG AS IT'S INSIDE SINGLE QUOTES. NOTE THAT USING THIS STATEMENT DOES NOT RENAME THE COLUMN IN THE TABLE, IT ONLY SHOWS IN THE RESULT--
+
+--EXAMPLE--
+SELECT name AS 'Titles'
+FROM movies;
+
+--USING THE DISTINCT STATEMENT-- 
+--USE THE DISTINCT STATEMENT TO RETURN UNIQUE VALUES IN THE OUTPUT. IT FILTERS OUT ALL DUPLICATE VALUES IN THE SPECIFIED COLUMN(S)
+
+--EXAMPLE--
+SELECT DISTINCT tools 
+FROM inventory;
+
+--USING THE WHERE STATEMENT--
+--USE THIS TO FILTER OUT THE RESULTS SET TO ONLY INCLUDE ROWS WHERE THE CONDITION IS TRUE--
+--YOU CAN USE OPERATORS TO CREATE A CONDITION THAT CAN BE EVALUATED AS EITHER TRUE OR FALSE--
+--LIST OF OPERATORS--
+= equal to
+!= not equal to
+> greater than
+< less than
+>= greater than or equal to
+<= less than or equal to
+
+--EXAMPLE--
+SELECT *
+FROM movies
+WHERE imdb_rating > 8;
+
+--USING THE LIKE I STATEMENT--
+--LIKE can be a useful operator when you want to compare similar values.--
+--EXAMPLE--
+SELECT * 
+FROM movies
+WHERE name LIKE 'Se_en';
+
+//The _ means you can substitute any individual character here without breaking the pattern. The names Seven and Se7en both match this pattern. // 
+
+
+--USING THE LIKE II STATEMENT--
+% is a wildcard character that matches zero or more missing letters in the pattern. For example:
+
+A% matches all movies with names that begin with letter ‘A’
+%a matches all movies that end with ‘a’
+
+--EXAMPLE--
+SELECT * 
+FROM movies
+WHERE name LIKE 'A%';
+
+--EXAMPLE--
+SELECT * 
+FROM movies
+WHERE name LIKE 'The %';
+
+--USING THE NULL STATEMENT--
+Unknown values are indicated by NULL.
+It is not possible to test for NULL values with comparison operators, such as = and !=.
+Instead, we will have to use these operators:
+
+IS NULL
+IS NOT NULL
+
+--EXAMPLE--
+
+SELECT name
+FROM movies 
+WHERE imdb_rating IS NOT NULL;
+
+--USING THE BETWEEN STATEMENT--
+The BETWEEN operator is used in a WHERE clause to filter the result set within a certain range. It accepts two values that are either numbers, text or dates.
+BETWEEN goes up to the second value 
+
+--EXMAPLE USE THE BELOW QUERY TO GET RESULTS OF MOVIES THAT START WITH THE LETTER D, E, F-- 
+SELECT *
+FROM movies
+WHERE name BETWEEN 'D' AND 'G'; 
+--EXAMPLE--
+SELECT *
+FROM movies
+WHERE year BETWEEN 1990 AND 1999;
+
+Also, numeric values (INTEGER or REAL data types) don’t need to be wrapped with single quotes, whereas TEXT values do.
