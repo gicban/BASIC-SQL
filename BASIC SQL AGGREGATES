@@ -1,0 +1,111 @@
+BASIC AGGREGATES 
+COUNT(): count the number of rows
+SUM(): the sum of the values in a column
+MAX()/MIN(): the largest/smallest value
+AVG(): the average of the values in a column
+ROUND(): round the values in the column
+
+--COUNT FUNCTION-- //THE * ALOWS YOU TO COUNT EVERY ROW//
+SELECT COUNT(*)
+FROM table_name; 
+
+--SUM FUNCTION-- //SUM() is a function that takes the name of a column as an argument and returns the sum of all the values in that column.//
+--EXAMPLE--
+SELECT SUM(downloads)
+FROM fake_apps;
+
+--MAX & MIN -- 
+The MAX() and MIN() functions return the highest and lowest values in a column, respectively.
+
+
+--AVERAGE-- //The AVG() function works by taking a column name as an argument and returns the average value for that column.//
+-EXAMPLE--
+SELECT AVG(downloads)
+FROM fake_apps;
+
+--ROUND--
+// ROUND() function takes two arguments inside the parenthesis:
+
+a column name
+an integer
+It rounds the values in the column to the number of decimal places specified by the integer.//
+--EXAMPLE--
+SELECT ROUND(price, 0)
+FROM fake_apps;
+
+--EXAMPLE 2--
+
+SELECT ROUND (AVG (PRICE),2)
+FROM fake_apps 
+;
+
+--GROUP BY--
+GROUP BY is a clause in SQL that is used with aggregate functions. It is used in collaboration with the SELECT statement to arrange identical data into groups.
+
+The GROUP BY statement comes after any WHERE statements, but before ORDER BY or LIMIT.
+
+--EXAMPLE OF OBTAINING THE TOTAL NUMBER OF DOWNLOADS FOR EACH CATEGORY--
+
+SELECT 
+  category
+, SUM (downloads)
+
+FROM fake_apps 
+
+GROUP BY category 
+;
+
+--GROUP BY 2--
+SELECT ROUND(imdb_rating),
+   COUNT(name)
+FROM movies
+GROUP BY ROUND(imdb_rating)
+ORDER BY ROUND(imdb_rating);
+
+EQUIVALENT TO 
+SELECT ROUND(imdb_rating),
+   COUNT(name)
+FROM movies
+GROUP BY 1
+ORDER BY 1;
+
+--HAVING--
+Having
+In addition to being able to group data using GROUP BY, SQL also allows you to filter which groups to include and which to exclude.
+
+For instance, imagine that we want to see how many movies of different genres were produced each year, but we only care about years and genres with at least 10 movies.
+
+We can’t use WHERE here because we don’t want to filter the rows; we want to filter groups.
+
+This is where HAVING comes in.
+
+HAVING is very similar to WHERE. In fact, all types of WHERE clauses you learned about thus far can be used with HAVING.
+
+We can use the following for the problem:
+
+SELECT year,
+   genre,
+   COUNT(name)
+FROM movies
+GROUP BY 1, 2
+HAVING COUNT(name) > 10;
+When we want to limit the results of a query based on values of the individual rows, use WHERE.
+When we want to limit the results of a query based on an aggregate property, use HAVING.
+HAVING statement always comes after GROUP BY, but before ORDER BY and LIMIT.
+
+--EXAMPLE--
+
+Return the average valuation, in each category.
+
+Round the averages to two decimal places.
+
+Lastly, order the list from highest averages to lowes
+
+SELECT 
+ category
+, ROUND (AVG (valuation),2)
+
+FROM startups
+GROUP BY 1
+ORDER  BY 2 DESC 
+;
