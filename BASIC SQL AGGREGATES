@@ -109,3 +109,12 @@ FROM startups
 GROUP BY 1
 ORDER  BY 2 DESC 
 ;
+
+
+
+SQL LITE FUNCTION 
+SELECT timestamp,
+   strftime('%H', timestamp)
+FROM hacker_news
+GROUP BY 1
+LIMIT 20;
