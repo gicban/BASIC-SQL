@@ -1,0 +1,94 @@
+--PRACTICE SIMPLE JOINS--
+SELECT COUNT (*) 
+FROM newspaper;
+
+SELECT COUNT (*)
+FROM online;
+
+SELECT COUNT (*) 
+FROM newspaper
+JOIN online 
+  ON online.id = newspaper.id
+  ;
+
+--LEFT JOINS-- 
+Left Joins
+What if we want to combine two tables and keep some of the un-matched rows?
+
+SQL lets us do this through a command called LEFT JOIN. A left join will keep all rows from the first table, regardless of whether there is a matching row in the second table.
+
+--PRIMARY KEYS--
+Primary Key vs Foreign Key
+Let’s return to our example of the magazine subscriptions. Recall that we had three tables: orders, subscriptions, and customers.
+
+Each of these tables has a column that uniquely identifies each row of that table:
+
+order_id for orders
+subscription_id for subscriptions
+customer_id for customers
+These special columns are called primary keys.
+
+Primary keys have a few requirements:
+
+None of the values can be NULL.
+Each value must be unique (i.e., you can’t have two customers with the same customer_id in the customers table).
+A table can not have more than one primary key column.
+
+When the primary key for one table appears in a different table, it is called a foreign key.
+
+--SCENARIO--
+Suppose Columbia University has two tables in their database:
+
+The classes table contains information on the classes that the school offers. Its primary key is id.
+The students table contains information on all students in the school. Its primary key is id. It contains the foreign key class_id, which corresponds to the primary key of classes.
+Perform an inner join of classes and students using the primary and foreign keys described above, and select all the columns.
+
+--CODE--
+ SELECT * 
+ FROM classes 
+ JOIN students 
+  ON classes.id = students.class_id
+  
+  
+  --UNION--
+  Union
+Sometimes we just want to stack one dataset on top of the other. Well, the UNION operator allows us to do that.
+
+Suppose we have two tables and they have the same columns.
+
+table1:
+
+pokemon	type
+Bulbasaur	Grass
+Charmander	Fire
+Squirtle	Water
+
+table2:
+
+pokemon	type
+Snorlax	Normal
+
+
+-WITH FUNCTION--
+The WITH statement allows us to perform a separate query (such as aggregating customer’s subscriptions)
+previous_results is the alias that we will use to reference any columns from the query inside of the WITH clause
+We can then go on to do whatever we want with this temporary table (such as join the temporary table with another table)
+Essentially, we are putting a whole first query inside the parentheses () and giving it a name. After that, we can use this name as if it’s a table and write a new query using the first query.
+
+WITH previous_query AS (
+   SELECT customer_id,
+      COUNT(subscription_id) AS 'subscriptions'
+   FROM orders
+   GROUP BY customer_id
+)
+SELECT customers.customer_name, 
+   previous_query.subscriptions
+FROM previous_query
+JOIN customers
+  ON previous_query.customer_id = customers.customer_id;
+  
+--USING ORDER BY AND LIMIT--
+SELECT * 
+FROM cars 
+ORDER BY trips_completed DESC
+LIMIT 2;
